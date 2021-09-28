@@ -1,59 +1,27 @@
 import '../css/App.css';
-import {useState} from 'react';
+import EditAPIKeyDialog from './EditAPIKeyDialog.react';
+import StockSearchInput from './StockSearchInput.react';
 import {RecoilRoot} from 'recoil';
-import {useAPIKey, useSetAPIKey} from '../recoil/hooks';
-import {Pane, Dialog, TextInput} from 'evergreen-ui'
+import {useSetAPIKey} from '../recoil/hooks';
+import {Pane, Text, Button} from 'evergreen-ui'
 
 function App() {
-  const key = useAPIKey();
+  const setAPIKey = useSetAPIKey();
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>{key}</p>
-      </header>
+    <Pane display="flex" height="100vh">
+      <Pane width={300} height="100vh" display="flex" flexDirection="column" padding={16} elevation={1}>
+        <Pane flex={1}>
+          <Text>Enter a stock to plot:</Text>
+          <StockSearchInput />
+        </Pane>
+        <Button height={48} onClick={() => setAPIKey()}>Reset API Key</Button>
+      </Pane>
+      <Pane flex={1} height="100vh" />
       <EditAPIKeyDialog />
-    </div>
+    </Pane>
   );
 }
 
-function EditAPIKeyDialog() {
-  const key = useAPIKey();
-  const setKey = useSetAPIKey();
-  const [text, setText] = useState(key ?? '');
-  const isShown = key == null;
-  return (
-    <Pane>
-      <Dialog
-        isShown={isShown}
-        title="Set an AlphaVantage API Key"
-        confirmLabel="Update API Key"
-        intent="success"
-        hasClose={false}
-        hasCancel={false}
-        shouldCloseOnOverlayClick={false}
-        shouldCloseOnEscapePress={false}
-        isConfirmDisabled={text == null || text === ''}
-        onConfirm={(close) => {
-          setKey(text);
-          close();
-        }}
-      >
-      <Pane>
-      This application uses AlphaVantage to retrieve stock data and you must use your personal AlphaVantage API key.
-      This application has no backend and there's no way for us to see this :)
-      You can get your AlphaAPI Key from <a href="https://alphavantage.co">here</a>.
-      </Pane>
-      <Pane marginTop={16}>
-      <TextInput
-        placeholder="Your API Key"
-        onChange={e => setText(e.target.value)}
-        required={true}
-        value={text} />
-      </Pane>
-      </Dialog>
-    </Pane>
-  )
-}
 
 function AppWrapper() {
 return <RecoilRoot><App/></RecoilRoot>;
