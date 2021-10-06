@@ -1,6 +1,6 @@
 import {useAPIKey} from '../recoil/hooks';
 
-const BASE_URI = 'https://alphavantage.co/query';
+const BASE_URI = 'https://www.alphavantage.co/query?';
 const FUNCTION = 'TIME_SERIES_MONTHLY';
 
 export default function useFetchStockData() {
@@ -12,6 +12,6 @@ export default function useFetchStockData() {
             symbol: ticker,
             apikey: apiKey,
         });
-        return fetch(url, {mode: 'no-cors'}).then(response => response.json());
+        return fetch(url, {}).then(response => response.json());
     }
 }

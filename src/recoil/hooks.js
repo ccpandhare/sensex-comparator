@@ -13,3 +13,6 @@ export const useSetAPIKey = () => {
         }
     }
 }
+
+export const useStockData = () => useRecoilValue(store.StockDataAtom);
+export const useSetStockData = () => useSetRecoilState(store.StockDataAtom);
