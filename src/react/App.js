@@ -2,12 +2,15 @@ import '../css/App.css';
 import EditAPIKeyDialog from './EditAPIKeyDialog.react';
 import StockSearchInput from './StockSearchInput.react';
 import {RecoilRoot} from 'recoil';
-import {useSetAPIKey, useStockData} from '../recoil/hooks';
+import {useSetAPIKey, useData} from '../recoil/hooks';
+import useNormalisedData from '../data/useNormalisedData';
 import {Pane, Text, Button} from 'evergreen-ui'
 
 function App() {
+  useNormalisedData();
   const setAPIKey = useSetAPIKey();
-  const stockData = useStockData();
+  const data = useData();
+
   return (
     <Pane display="flex" height="100vh">
       <Pane width={300} height="100vh" display="flex" flexDirection="column" padding={16} elevation={1}>
@@ -19,7 +22,7 @@ function App() {
       </Pane>
       <Pane flex={1} height="100vh">
         <pre>
-          {JSON.stringify(stockData, null, 2)}
+          {JSON.stringify(data, null, 2)}
         </pre>
       </Pane>
       <EditAPIKeyDialog />

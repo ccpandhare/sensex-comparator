@@ -5,7 +5,12 @@ export const APIKeyAtom = atom({
     default: localStorage.getItem('APIKey') ?? null,
 });
 
-export const StockDataAtom = atom({
-    key: 'Store.StockData',
+export const DataAtom = atom({
+    key: 'Store.Data',
     default: null,
-})
+});
+
+export const StockQueryAtom = atom({
+    key: 'Store.StockQuery',
+    default: null,
+});

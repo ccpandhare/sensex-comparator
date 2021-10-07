@@ -14,5 +14,8 @@ export const useSetAPIKey = () => {
     }
 }
 
-export const useStockData = () => useRecoilValue(store.StockDataAtom);
-export const useSetStockData = () => useSetRecoilState(store.StockDataAtom);
+export const useData = () => useRecoilValue(store.DataAtom);
+export const useSetData = () => useSetRecoilState(store.DataAtom);
+
+export const useStockQuery = () => useRecoilValue(store.StockQueryAtom);
+export const useSetStockQuery = () => useSetRecoilState(store.StockQueryAtom);
